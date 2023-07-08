@@ -1,0 +1,35 @@
+[Unit]
+Description=Streamlit App
+After=network.target
+
+[Service]
+ExecStart=/home/ubuntu/miniconda/bin/streamlit run /home/ubuntu/streamlit_test/str_app.py
+WorkingDirectory=/home/ubuntu/streamlit_test
+User=ubuntu
+Group=ubuntu
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+-----------------
+Pra enable:
+sudo systemctl enable streamlit-app.service
+
+Pra start:
+sudo systemctl start streamlit-app.service
+
+Pra stop:
+sudo systemctl stop streamlit-app.service
+
+Pra status:
+sudo systemctl status streamlit-app.service
+
+Pra reload:
+sudo systemctl daemon-reload
+
+Para deletar:
+sudo systemctl stop streamlit-app.service
+sudo systemctl disable streamlit-app.service
+sudo rm /etc/systemd/system/streamlit-app.service
+sudo systemctl daemon-reload
