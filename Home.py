@@ -16,6 +16,7 @@ def main():
         
     # Variaveis
     folder_path = 'rngs/test_rng/'
+    local_folder = 'src/temp/'
     bucket_name = st.secrets['BUCKET_NAME']
     s3 = sup.create_s3_client()
     
@@ -52,7 +53,7 @@ def main():
     # Cria um botão "Calcular"
     if st.button("Mostrar gráfico"):
         with st.spinner('Runing...'):
-            df = sup.read_csv_aws(s3, bucket_name, folder_path, file_name)
+            df = sup.read_csv_aws(s3, bucket_name, folder_path, file_name, local_folder)
             bit_count = sup.find_bit_count(file_name)
             interval = sup.find_interval(file_name)
             chart_data = sup.csv_to_df(df, bit_count)

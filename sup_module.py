@@ -50,16 +50,17 @@ def csv_to_df(df, bit_count):
     return df
 
 @st.cache_data(show_spinner=False)
-def read_csv_aws(_s3, bucket_name, folder_path, file_name):
+def read_csv_aws(_s3, bucket_name, folder_path, file_name, local_folder):
     # Specify the bucket name and file path
     file_path = os.path.join(folder_path, file_name)
-
+    local_folder_file = os.path.join(local_folder, 'local_file.csv')
+    
     try:
         # Download the file to a local path
-        _s3.download_file(bucket_name, file_path, 'src/temp/local_file.csv')
+        _s3.download_file(bucket_name, file_path, local_folder_file)
         
         # Read the contents of the file into a Pandas dataframe
-        df = pd.read_csv('src/temp/local_file.csv', sep=' ', names=["Time", "Ones"])
+        df = pd.read_csv(local_folder_file, sep=' ', names=["Time", "Ones"])
         return df
     
     except Exception as e:
