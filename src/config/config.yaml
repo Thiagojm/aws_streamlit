@@ -6,7 +6,7 @@ credentials:
       password: $2b$12$3YaJs8IsoADGTL.PJnt5aeWWvSuad.QZXmTxBqVnDJOnCJjlAoRo. # To be replaced with hashed password
     dr.thiagojung:
       email: dr.tjmg@mail.com
-      name: Gabi
+      name: Dr. T. Jung
       password: $2b$12$SyQpGqcwuOLT14XoU.XnEOkLez6J8JPvQ5gbL4iUOMQ9ZBbOIMAYC # To be replaced with hashed password
     guest:
       email: guest@mail.com
