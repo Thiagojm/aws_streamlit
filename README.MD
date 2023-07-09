@@ -1,13 +1,12 @@
 # Streamlit Login App
 
-A simple Streamlit app with a login functionality, random text, widgets, and an image.
+An application that takes TRNG data from an AWS S3 Bucket and analyzes it into a graph and a dataframe.
 
 ## Features
 
-- Login functionality with username and password verification.
-- Displays a welcome message and random text in the main area upon successful login.
-- Includes checkboxes, sliders, and a selectbox as interactive widgets.
-- Displays an image in the app.
+- Login functionality with username and password verification;
+- The user can select which file he wants to work on in the side menu;
+- After clicking on "Show Graph", a graph will be displayed with the data and the standard deviation and, below, the dataframe used.
 
 ## Online
-https://apptest-str-app.streamlit.app/
+https://rng-charts.streamlit.app/
