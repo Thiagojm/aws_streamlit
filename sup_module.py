@@ -14,10 +14,11 @@ def find_bit_count(filename):
     bit_count = int(match.group(1))
     return bit_count
 
-def list_csv_files(s3, bucket_name, folder_path):
+@st.cache_data(show_spinner=False)
+def list_csv_files(_s3, bucket_name, folder_path):
     try:
         # List objects in the specified folder
-        response = s3.list_objects_v2(Bucket=bucket_name, Prefix=folder_path)
+        response = _s3.list_objects_v2(Bucket=bucket_name, Prefix=folder_path)
 
         # Iterate through the objects and filter for .csv files
         # csv_files = [obj['Key'] for obj in response['Contents'] if obj['Key'].lower().endswith('.csv')]
@@ -27,7 +28,7 @@ def list_csv_files(s3, bucket_name, folder_path):
     except Exception as e:
         print(f"Error accessing S3 bucket: {e}")
     
-
+@st.cache_resource(show_spinner=False)
 def create_s3_client():
     # AWS Credentials
     access_key = st.secrets['AWS_ACCESS_KEY']
@@ -37,6 +38,7 @@ def create_s3_client():
     s3 = boto3.client('s3', aws_access_key_id=access_key, aws_secret_access_key=secret_key)
     return s3
 
+@st.cache_data(show_spinner=False)
 def csv_to_df(df, bit_count):
     df.dropna(inplace=True)
     df = df.reset_index()
@@ -47,14 +49,14 @@ def csv_to_df(df, bit_count):
     df['Zscore'] = (df['Average'] - (bit_count / 2)) / (((bit_count / 4) ** 0.5) / (df['Sample'] ** 0.5))
     return df
 
-
-def read_csv_aws(s3, bucket_name, folder_path, file_name):
+@st.cache_data(show_spinner=False)
+def read_csv_aws(_s3, bucket_name, folder_path, file_name):
     # Specify the bucket name and file path
     file_path = os.path.join(folder_path, file_name)
 
     try:
         # Download the file to a local path
-        s3.download_file(bucket_name, file_path, 'src/temp/local_file.csv')
+        _s3.download_file(bucket_name, file_path, 'src/temp/local_file.csv')
         
         # Read the contents of the file into a Pandas dataframe
         df = pd.read_csv('src/temp/local_file.csv', sep=' ', names=["Time", "Ones"])
