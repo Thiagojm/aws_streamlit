@@ -1,11 +1,6 @@
 import os
-import json
-import time
 import streamlit as st
 import streamlit_authenticator as stauth
-import math
-import yaml
-from yaml.loader import SafeLoader
 import sup_module as sup
 import plotly.express as px
 
@@ -71,16 +66,13 @@ def main():
         
     
 if __name__ == "__main__":
-    # Autenticação
-    with open('src/config/config.yaml') as file:
-        config = yaml.load(file, Loader=SafeLoader)
-
+    # Create an instance of the Authenticate class
     authenticator = stauth.Authenticate(
-        config['credentials'],
-        config['cookie']['name'],
-        config['cookie']['key'],
-        config['cookie']['expiry_days'],
-        config['preauthorized']
+    dict(st.secrets['credentials']),
+    st.secrets['cookie']['name'],
+    st.secrets['cookie']['key'],
+    st.secrets['cookie']['expiry_days'],
+    st.secrets['preauthorized']
 )
 
     name, authentication_status, username = authenticator.login("Login", "main")
