@@ -54,9 +54,9 @@ def main():
             chart_data = sup.csv_to_df(df, bit_count)
             fig = px.line(chart_data, x='Time', y='Zscore')
             st.divider()
-            st.subheader(f"Arquivo: {sidebar_selectbox}, {bit_count} bits per {interval} second(s)")
+            st.subheader(f"File: {sidebar_selectbox}, {bit_count} bits / {interval} second(s)")
             st.plotly_chart(fig, use_container_width=True)
-            st.text("Tabela de dados:")
+            st.text("Dataframe:")
             st.dataframe(chart_data, use_container_width=True)
             
         
