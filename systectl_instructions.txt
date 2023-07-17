@@ -13,22 +13,22 @@ Restart=always
 WantedBy=multi-user.target
 
 -----------------
-Pra enable:
+To enable:
 sudo systemctl enable streamlit-app.service
 
-Pra start:
+To start:
 sudo systemctl start streamlit-app.service
 
-Pra stop:
+To stop:
 sudo systemctl stop streamlit-app.service
 
-Pra status:
+To status:
 sudo systemctl status streamlit-app.service
 
-Pra reload:
+To reload:
 sudo systemctl daemon-reload
 
-Para deletar:
+To delete:
 sudo systemctl stop streamlit-app.service
 sudo systemctl disable streamlit-app.service
 sudo rm /etc/systemd/system/streamlit-app.service

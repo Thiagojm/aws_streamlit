@@ -14,27 +14,23 @@ def main():
     if "session" not in st.session_state:
         st.session_state.session = SessionState()
         
-    # Variaveis
+    # Variables
     folder_path = 'rngs/test_rng/'
     local_folder = 'src/temp/'
     bucket_name = st.secrets['BUCKET_NAME']
     s3 = sup.create_s3_client()
     
-    ######### Menu Suspenso #########     
+    ######### Sidebar #########     
 
-    # Cria o menu suspenso na barra lateral com as opções e as tabelas em ordem
+    # Make a sidebar
     st.sidebar.markdown(f"Welcome {name}")
     csv_files_list = sup.list_csv_files(s3, bucket_name, folder_path)
-    sidebar_selectbox = st.sidebar.selectbox("Escolha um arquivo:", csv_files_list)
+    sidebar_selectbox = st.sidebar.selectbox("Choose a file:", csv_files_list)
     authenticator.logout("Logout", "sidebar")
     file_name = os.path.join(sidebar_selectbox + '.csv')
-        
+                    
 
-             
-
-    ####### Pagina principal #######
-
-    
+    ####### Home Page #######    
     # Header
     st.header("RNG Data Visualization")
     st.divider()
@@ -44,14 +40,13 @@ def main():
     with col2:
         st.image("src/img/sup_cpu.jpg")
     with col3:
-        st.write("")
-        
+        st.write("")     
     
 
     st.divider()
     
-    # Cria um botão "Calcular"
-    if st.button("Mostrar gráfico"):
+    # Show Graph Button
+    if st.button("Show Graph"):
         with st.spinner('Runing...'):
             df = sup.read_csv_aws(s3, bucket_name, folder_path, file_name, local_folder)
             bit_count = sup.find_bit_count(file_name)
