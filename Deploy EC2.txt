@@ -1,9 +1,9 @@
 Login to AWS EC2 instance using SSH key:
-ssh -i "streamlit_test.pem" ubuntu@ip
+ssh -i "streamlit_test.pem" ubuntu@3.133.91.127
 
 
 
-
+https://towardsdatascience.com/how-to-deploy-a-streamlit-app-using-an-amazon-free-ec2-instance-416a41f69dc3
 
 
 How to Deploy a Streamlit App using an Amazon Free ec2 instance?
