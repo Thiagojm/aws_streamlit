@@ -5,14 +5,6 @@ import sup_module as sup
 import plotly.express as px
 
 def main():
-    # Define a class to handle session state
-    class SessionState:
-        def __init__(self):
-            self.messages = []
-
-    # Create or get the session state
-    if "session" not in st.session_state:
-        st.session_state.session = SessionState()
         
     # Variables
     folder_path = 'rngs/test_rng/'
@@ -53,6 +45,7 @@ def main():
             interval = sup.find_interval(file_name)
             chart_data = sup.csv_to_df(df, bit_count)
             fig = px.line(chart_data, x='Time', y='Zscore')
+            fig.update_yaxes(range=[-5, 5])
             st.divider()
             st.subheader(f"File: {sidebar_selectbox}, {bit_count} bits / {interval} second(s)")
             st.plotly_chart(fig, use_container_width=True)
