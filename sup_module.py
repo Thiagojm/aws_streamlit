@@ -14,7 +14,7 @@ def find_bit_count(filename):
     bit_count = int(match.group(1))
     return bit_count
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=3600)
 def list_csv_files(_s3, bucket_name, folder_path):
     try:
         # List objects in the specified folder
@@ -60,7 +60,7 @@ def read_csv_aws(_s3, bucket_name, folder_path, file_name, local_folder):
         _s3.download_file(bucket_name, file_path, local_folder_file)
         
         # Read the contents of the file into a Pandas dataframe
-        df = pd.read_csv(local_folder_file, sep=' ', names=["Time", "Ones"])
+        df = pd.read_csv(local_folder_file, sep=',', names=["Time", "Ones"])
         return df
     
     except Exception as e:
